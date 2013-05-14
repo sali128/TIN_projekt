@@ -52,22 +52,36 @@ var socket = io.listen(server);
 socket.on('connection', function(client) {
     'use strict';
     var image;
-    var dirImg = __dirname+'/image/';
-    fs.readdir(dirImg, function(err, files) {
+    var dirImg = __dirname + '/image/';
+    var nameImg;
+    var adminL = 'admin';
+    var adminP = 'admin';
 
-        for(var i = 0; i < files.length; i++) {
-            if(path.extname(files[i]) == '.jpg') {
-                console.log('W folderze znajduje sie: ' + files[i]);
-                //image = fs.createReadStream(dirImg + files[i]);
-                image = fs.readFile(dirImg+files[i],'base64',function(err,img){
-                    client.emit('message',{'name':files[i], 'image':img});
-                });
-               
-            }
+         client.on('adminLogin', function(admin) {
+        if(admin.login === adminL && admin.password === adminP) {
+            client.emit('loginToAdmin', 'yes');
+        } else {
+            client.emit('loginToAdmin', 'no');
         }
     });
 
-
+    client.on('klientLogin', function() {
+        fs.readdir(dirImg, function(err, files) {
+            for(var i = 0; i < files.length; i++) {
+               if(path.extname(files[i]) === '.jpg') {
+                   nameImg = files[i];
+                   image = fs.readFile(dirImg + files[i], 'base64', function(err, img) {
+                       client.emit('image', {
+                            'name': nameImg,
+                            'image': img
+                        });
+                        console.log('W folderze znajduje sie: ' + nameImg);
+                    });
+                }
+ 
+            }
+        });
+    });
 
 });
 
