@@ -53,7 +53,6 @@ socket.on('connection', function(client) {
     'use strict';
     var image;
     var dirImg = __dirname + '/image/';
-    var nameImg;
     var adminL = 'admin';
     var adminP = 'admin';
 
@@ -68,21 +67,23 @@ socket.on('connection', function(client) {
     client.on('klientLogin', function() {
         fs.readdir(dirImg, function(err, files) {
             for(var i = 0; i < files.length; i++) {
-               if(path.extname(files[i]) === '.jpg') {
-                   nameImg = files[i];
-                   image = fs.readFile(dirImg + files[i], 'base64', function(err, img) {
-                       client.emit('image', {
-                            'name': nameImg,
-                            'image': img
-                        });
-                        console.log('W folderze znajduje sie: ' + nameImg);
-                    });
+          (function() {
+                    var j = i;
+                    process.nextTick(function() {
+                        if(path.extname(files[j]) === '.jpg') {
+                            image = fs.readFile(dirImg + files[j], 'base64', function(err, img) {
+                                client.emit('image', {
+                                    'name': files[j],
+                                    'image': img
+                                });
+                                console.log('W folderze znajduje sie: ' + files[j]);
+                            });
+                        }
+                     });
                 }
- 
-            }
-        });
-    });
-
-});
+                })();
+             }
+         });
+     });
 
 server.listen(3000);
