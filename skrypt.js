@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     var socket = io.connect('http://localhost:3000');
 
-    console.log('connecting…
+    console.log('connecting…');
 
     $('#klient').click(function() {
     $('#loginMain').hide();
@@ -39,22 +39,20 @@ $(document).ready(function () {
   });
 
   socket.on('image', function(data) {
-    $('#gallery').append('<img id="' + data.name + '" src="data:image/jpeg;base64,' + data.image + '" width="50"><br/>');
-    //$('#gallery').append('<input id="'+data.name+'" type="button" calss="button" value="Zamow"><br/>');
     
-    $('#gallery').append('<input id="' + data.name + '" type="button" value="Zamów" class="guzik"><br/>');
-    
-    /*
-    $("button").live("click", function(event){
-      alert("alalal");
-      event.preventDefault();
-    });
-
-    */
-
+    $('#gallery').append('<img id="' + data.name + '" src="data:image/jpeg;base64,' + data.image + '" width="320"><br/>');
+    $('#gallery').append('<input id="' + data.name + '" type="button" value="Zamow" class="guzik"><br/>');
     $(".guzik").live("click", function() {
-      alert($(this).attr('id'));
+      socket.emit('zamowienie', $(this).attr('id'));
       return false;
-    
-  });
+    });
 });
+
+    socket.on('zamowienieAdmin', function(data) {
+    $('#zamowienie').append('<img src="data:image/jpeg;base64,' + data.image + '" width="320"><br/>');
+  
+  });
+ });
+
+
+

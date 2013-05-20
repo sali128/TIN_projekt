@@ -77,13 +77,28 @@ socket.on('connection', function(client) {
                                     'image': img
                                 });
                                 console.log('W folderze znajduje sie: ' + files[j]);
-                            });
-                        }
-                     });
-                }
+                                });
+                            }
+                        });
                 })();
-             }
-         });
-     });
+            }
+        });
+    });
+
+        client.on('zamowienie', function(data) {
+        fs.readdir(dirImg, function(err, files) {
+            for(var i = 0; i < files.length; i++) {
+                if(path.basename(dirImg + files[i]) === data) {
+                    image = fs.readFile(dirImg + files[i], 'base64', function(err, img) {
+                        client.broadcast.emit('zamowienieAdmin', {
+                            'image': img
+                        });
+                    });
+                }
+            }
+        });
+    });
+
+});
 
 server.listen(3000);
