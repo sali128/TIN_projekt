@@ -10,35 +10,71 @@ body {
   text-align: center;
   margin-top: 100px;
   font-family:arial;
-  font-size:28px;
+  font-size:24px;
   font-weight:bold;
-  text-decoration:none;
-  text-shadow:1px 1px 0px #9b14b3;
 }
-.guzik {
-  -moz-box-shadow:inset 0px 1px 0px 0px #e184f3;
-  -web kit-box-shadow:inset 0px 1px 0px 0px #e184f3;
-  box-shadow:inset 0px 1px 0px 0px #e184f3;
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c123de), color-stop(1, #a20dbd) );
-  background:-moz-linear-gradient( center top, #c123de 5%, #a20dbd 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c123de', endColorstr='#a20dbd');
-  background-color:#c123de;
-  -moz-border-radius:6px;
-  -webkit-border-radius:6px;
-  border-radius:6px;
-  border:1px solid #a511c0;
-  display:inline-block;
-  color:#ffffff;
-  font-family:arial;
-  font-size:28px;
-  font-weight:bold;
-  padding:6px 24px;
-  text-decoration:none;
-  text-shadow:1px 1px 0px #9b14b3;
+#galleryMain {
+    text-align: center;
 }
-.guzik:hover {
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a20dbd), color-stop(1, #c123de) );
-  background:-moz-linear-gradient( center top, #a20dbd 5%, #c123de 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a20dbd', endColorstr='#c123de');
-  background-color:#a20dbd;
+#adminMain {
+    text-align: center;
+}
+input {         
+    padding: 8px;
+    margin: 4px 0 20px 0; 
+    background: #fff; 
+    width: 220px; 
+    font-size: 24px; 
+    color: #555; 
+    border: 1px #ddd solid;
+    
+    /* -- CSS3 Shadow - create a shadow around each input element -- */ 
+    -webkit-box-shadow: 0px 0px 4px #aaa;
+    -moz-box-shadow: 0px 0px 4px #aaa;
+    box-shadow: 0px 0px 4px #aaa;
+    
+    /* -- CSS3 Transition - define what the transition will be applied to (i.e. the background) -- */       
+    -webkit-transition: background 0.3s linear;
+}
+input:hover {
+    background: #eee; 
+}
+input.button {
+    width: 150px; 
+    color: #eee; 
+    text-transform: uppercase; 
+    margin-top: 10px;
+    background-color: #9768d1;
+    border: none;
+    
+    /* -- CSS3 Transition - define which property to animate (i.e. the shadow)  -- */
+    -webkit-transition: -webkit-box-shadow 0.3s linear;
+    
+    /* -- CSS3 - Rounded Corners -- */
+    -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px;
+    border-radius: 4px; 
+                    
+    /* -- CSS3 Shadow - create a shadow around each input element -- */ 
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9768d1), to(#7b52ab)); 
+    background: -moz-linear-gradient(25% 75% 90deg,#9768d1, #7b52ab);       
+} 
+input.button:hover {        
+    -webkit-box-shadow: 0px 0px 20px #555;
+    -moz-box-shadow: 0px 0px 20px #aaa;
+    box-shadow: 0px 0px 20px #555;
+    cursor:  pointer; 
+}
+img {
+    /* -- CSS3 Transition - define which property to animate (i.e. the shadow)  -- */
+    -webkit-transition: -webkit-box-shadow 0.3s linear;
+    
+    /* -- CSS3 - Rounded Corners -- */
+    -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px;
+    border-radius: 4px; 
+                    
+    /* -- CSS3 Shadow - create a shadow around each input element -- */ 
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9768d1), to(#7b52ab)); 
+    background: -moz-linear-gradient(25% 75% 90deg,#9768d1, #7b52ab);   
 }
