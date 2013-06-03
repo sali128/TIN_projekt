@@ -56,7 +56,7 @@ socket.on('connection', function(client) {
     var adminL = 'admin';
     var adminP = 'admin';
 
-         client.on('adminLogin', function(admin) {
+         client.on('adminLogin', function(admin) { /*admin login*/
         if(admin.login === adminL && admin.password === adminP) {
             client.emit('loginToAdmin', 'yes');
         } else {
@@ -64,12 +64,12 @@ socket.on('connection', function(client) {
         }
     });
 
-    client.on('klientLogin', function() {
+    client.on('klientLogin', function() { /*wszystkie zdjecia*/
         fs.readdir(dirImg, function(err, files) {
             for(var i = 0; i < files.length; i++) {
           (function() {
                     var j = i;
-                    process.nextTick(function() {
+                    process.nextTick(function() { /*synchronizacja wszystkich zdjec*/
                         if(path.extname(files[j]) === '.jpg') {
                             image = fs.readFile(dirImg + files[j], 'base64', function(err, img) {
                                 client.emit('image', {
@@ -85,7 +85,7 @@ socket.on('connection', function(client) {
         });
     });
 
-        client.on('zamowienie', function(data) {
+        client.on('zamowienie', function(data) { /*wysylanie zdjecia do admina*/
         fs.readdir(dirImg, function(err, files) {
             for(var i = 0; i < files.length; i++) {
                 if(path.basename(dirImg + files[i]) === data) {

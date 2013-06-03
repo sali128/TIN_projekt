@@ -2,9 +2,9 @@
 /*global io: false */
 $(document).ready(function () {
     'use strict';
-     $('#galleryMain').hide();
+     $('#galleryMain'). hide();
      $('#adminMain').hide();
-     $('#loginPanel').hide();
+     $('#loginPanel').hide(); 
 
     var socket = io.connect('http://localhost:3000');
 
@@ -13,7 +13,7 @@ $(document).ready(function () {
     $('#klient').click(function() {
     $('#loginMain').hide();
     $('#galleryMain').show();
-    socket.emit('klientLogin');
+    socket.emit('klientLogin'); 
     });
 
     $('#admin').click(function() {
@@ -22,7 +22,7 @@ $(document).ready(function () {
     });
 
 
-    $('#zaloguj').click(function() {
+    $('#zaloguj').click(function() { /*wysylanie formularza do serwera*/
     socket.emit('adminLogin', {
       'login': $('#adminLogin').val(),
       'password': $('#adminPassword').val()
@@ -38,18 +38,18 @@ $(document).ready(function () {
     }
   });
 
-  socket.on('image', function(data) {
+  socket.on('image', function(data) { /*po zalogowaniu wyswietlenie galerii zdjec po stringach-base64*/
     
-    $('#gallery').append('<img id="' + data.name + '" src="data:image/jpeg;base64,' + data.image + '" width="320"><br/>');
+    $('#gallery').append('<img id="' + data.name + '" src="data:image/jpeg;base64,' + data.image + '" width="320"><br/>'); /*wyswietlanie po konwersji*/
     $('#gallery').append('<input id="' + data.name + '" type="button" value="Zamow" class="guzik"><br/>');
     $(".guzik").live("click", function() {
-      socket.emit('zamowienie', $(this).attr('id'));
-      return false;
+      socket.emit('zamowienie', $(this).attr('id')); /*wysylanie zdjecia do admina po id*/
+      return false; 
     });
 });
 
     socket.on('zamowienieAdmin', function(data) {
-    $('#zamowienie').append('<img src="data:image/jpeg;base64,' + data.image + '" width="320"><br/>');
+    $('#zamowienie').append('<img src="data:image/jpeg;base64,' + data.image + '" width="320"><br/>'); /*wyswietlanie zamowionych zdjec*/
   
   });
  });
